@@ -36,3 +36,6 @@ pip install requirements.txt
 ```sh
 python app.py
 ```
+
+### Usage
+Send `GET` request to `/api/all`
