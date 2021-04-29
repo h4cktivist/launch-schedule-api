@@ -19,7 +19,8 @@ def scrapper(url):
     datename_classes = soup.find_all('div', class_='datename')
     for dc in datename_classes:
         launch = {
-            "mission": dc.find('span', class_='mission').text,
+            "mission": dc.find('span', class_='mission').text.rsplit(' • ')[1],
+            "launchVehicle": dc.find('span', class_='mission').text.rsplit(' • ')[0],
             "date": dc.find('span', class_='launchdate').text
         }
 
