@@ -35,5 +35,12 @@ class AllLaunches(Resource):
 api.add_resource(AllLaunches, '/api/all')
 
 
+@app.errorhandler(404)
+def help_links(e):
+    return {
+        "allLaunches": '/api/all'
+    }
+
+
 if __name__ == '__main__':
     app.run()
