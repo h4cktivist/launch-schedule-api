@@ -10,28 +10,26 @@ app = Flask(__name__)
 api = Api(app)
 
 
-def scrapper(url):
-    launches = []
-
-    res = requests.get(url)
-    soup = BeautifulSoup(res.content, 'html.parser')
-
-    datename_classes = soup.find_all('div', class_='datename')
-    for dc in datename_classes:
-        launch = {
-            "mission": dc.find('span', class_='mission').text.rsplit(' • ')[1],
-            "launchVehicle": dc.find('span', class_='mission').text.rsplit(' • ')[0],
-            "date": dc.find('span', class_='launchdate').text
-        }
-
-        launches.append(launch)
-
-    return launches
-
-
 class AllLaunches(Resource):
+    url = 'https://spaceflightnow.com/launch-schedule/'
+
     def get(self):
-        return scrapper('https://spaceflightnow.com/launch-schedule/')
+        launches = []
+
+        res = requests.get(self.url)
+        soup = BeautifulSoup(res.content, 'html.parser')
+
+        datename_classes = soup.find_all('div', class_='datename')
+        for dc in datename_classes:
+            launch = {
+                'mission': dc.find('span', class_='mission').text.rsplit(' • ')[1],
+                'launchVehicle': dc.find('span', class_='mission').text.rsplit(' • ')[0],
+                'date': dc.find('span', class_='launchdate').text
+            }
+
+            launches.append(launch)
+
+        return launches
 
 
 api.add_resource(AllLaunches, '/api/all')
