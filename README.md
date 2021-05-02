@@ -40,4 +40,4 @@ python app.py
 ### Usage
 Send `GET` request to `/api/all` to get all launches
 
-Send `GET` request to `api/today` to get today launches
+Send `GET` request to `/api/today` to get today launches

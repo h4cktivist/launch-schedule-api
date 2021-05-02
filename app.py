@@ -64,7 +64,7 @@ api.add_resource(TodayLaunches, '/api/today')
 def help_links(e):
     return {
         'allLaunches': '/api/all',
-        'todayLaunches': 'api/today'
+        'todayLaunches': '/api/today'
     }
 
 
